@@ -1,0 +1,9 @@
+            compute_ipv4_dst_hash_index_ddos();
+            compute_ipv4_src_hash_index_ddos();
+
+            regSketchBitmapDdos.read(tmpBitDdos, meta.dstHashIdxDdos*8 + meta.srcHashIdxDdos);
+            if (tmpBitDdos == 0) {
+                process_new_flow_ddos();
+            }
+
+            regUniqueSrcDdos.read(meta.uniqueSrcCounterDdos, meta.dstHashIdxDdos);

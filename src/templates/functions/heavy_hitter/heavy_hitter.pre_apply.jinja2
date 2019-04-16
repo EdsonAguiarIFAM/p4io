@@ -1,0 +1,9 @@
+            if (hdr.tcp.isValid()) {
+                compute_tcp_reg_index();
+            } else if (hdr.udp.isValid()) {
+                compute_udp_reg_index();
+            } else {
+                compute_ipv4_reg_index();
+            }
+
+            update_register();

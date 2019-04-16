@@ -1,0 +1,25 @@
+    register<bit<1>>(8*64) regSketchBitmapSs;
+    register<bit<8>>(8) regUniqueDstSs;
+
+    bit<1> tmpBitSs;
+    bit<8> tmpCounterSs;
+
+    action compute_ipv4_src_hash_index_ss() {
+        hash(meta.srcHashIdxSs, HashAlgorithm.crc16, 6w0, {hdr.ipv4.srcAddr}, 4w7);
+    }
+
+    action compute_ipv4_dst_hash_index_ss() {
+        hash(meta.dstHashIdxSs, HashAlgorithm.crc16, 4w0, {hdr.ipv4.dstAddr}, 6w63);
+    }
+
+    action process_new_flow_ss() {
+        @atomic {
+            // mark the unique src bitmap
+            regSketchBitmapSs.write(meta.srcHashIdxSs*8 + meta.dstHashIdxSs, 1);
+
+            // append counter for the src address by one
+            regUniqueDstSs.read(tmpCounterSs, meta.srcHashIdxSs);
+            tmpCounterSs = tmpCounterSs + 1;
+            regUniqueDstSs.write(meta.srcHashIdxSs, tmpCounterSs);
+        }
+    }

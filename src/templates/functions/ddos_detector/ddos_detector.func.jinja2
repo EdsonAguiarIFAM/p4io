@@ -1,0 +1,25 @@
+    register<bit<1>>(8*64) regSketchBitmapDdos;
+    register<bit<8>>(8) regUniqueSrcDdos;
+
+    bit<1> tmpBitDdos;
+    bit<8> tmpCounterDdos;
+
+    action compute_ipv4_dst_hash_index_ddos() {
+        hash(meta.dstHashIdxDdos, HashAlgorithm.crc16, 4w0, {hdr.ipv4.dstAddr}, 4w7);
+    }
+
+    action compute_ipv4_src_hash_index_ddos() {
+        hash(meta.srcHashIdxDdos, HashAlgorithm.crc16, 6w0, {hdr.ipv4.srcAddr}, 6w63);
+    }
+
+    action process_new_flow_ddos() {
+        @atomic {
+            // mark the unique dst bitmap
+            regSketchBitmapDdos.write(meta.dstHashIdxDdos*8 + meta.srcHashIdxDdos, 1);
+
+            // append counter for the dst address by one
+            regUniqueSrcDdos.read(tmpCounterDdos, meta.dstHashIdxDdos);
+            tmpCounterDdos = tmpCounterDdos + 1;
+            regUniqueSrcDdos.write(meta.dstHashIdxDdos, tmpCounterDdos);
+        }
+    }

@@ -1,0 +1,119 @@
+    register<bit<8>>(1024) regCountMinSketch;
+    bit<8> tmp;
+
+    action compute_tcp_reg_index() {
+        hash(meta.hashed_address_s1, HashAlgorithm.crc16, 10w0,
+                 {
+                    hdr.ipv4.srcAddr,
+                    hdr.ipv4.dstAddr,
+                    hdr.ipv4.protocol,
+                    hdr.tcp.srcPort,
+                    hdr.tcp.dstPort
+                },
+                10w1023);
+
+        hash(meta.hashed_address_s2, HashAlgorithm.crc16, 10w0,
+                 {
+                    5w3,
+                    hdr.ipv4.srcAddr,
+                    hdr.ipv4.dstAddr,
+                    hdr.ipv4.protocol,
+                    3w5,
+                    hdr.tcp.srcPort,
+                    hdr.tcp.dstPort
+                },
+                10w1023);
+
+        hash(meta.hashed_address_s3, HashAlgorithm.crc16, 10w0,
+                 {
+                    7w11,
+                    hdr.ipv4.srcAddr,
+                    hdr.ipv4.dstAddr,
+                    hdr.ipv4.protocol,
+                    8w9,
+                    hdr.tcp.srcPort,
+                    hdr.tcp.dstPort
+                },
+                10w1023);
+    }
+
+    action compute_udp_reg_index() {
+        hash(meta.hashed_address_s1, HashAlgorithm.crc16, 10w0,
+                 {
+                    hdr.ipv4.srcAddr,
+                    hdr.ipv4.dstAddr,
+                    hdr.ipv4.protocol,
+                    hdr.udp.srcPort,
+                    hdr.udp.dstPort
+                },
+                10w1023);
+
+        hash(meta.hashed_address_s2, HashAlgorithm.crc16, 10w0,
+                 {
+                    5w3,
+                    hdr.ipv4.srcAddr,
+                    hdr.ipv4.dstAddr,
+                    hdr.ipv4.protocol,
+                    3w5,
+                    hdr.udp.srcPort,
+                    hdr.udp.dstPort
+                },
+                10w1023);
+
+        hash(meta.hashed_address_s3, HashAlgorithm.crc16, 10w0,
+                 {
+                    7w11,
+                    hdr.ipv4.srcAddr,
+                    hdr.ipv4.dstAddr,
+                    hdr.ipv4.protocol,
+                    8w9,
+                    hdr.udp.srcPort,
+                    hdr.udp.dstPort
+                },
+                10w1023);
+    }
+
+    action compute_ipv4_reg_index() {
+        hash(meta.hashed_address_s1, HashAlgorithm.crc16, 10w0,
+                 {hdr.ipv4.srcAddr, 7w11, hdr.ipv4.dstAddr}, 10w1023);
+
+        hash(meta.hashed_address_s2, HashAlgorithm.crc16, 10w0,
+                 {3w5, hdr.ipv4.srcAddr, 5w3, hdr.ipv4.dstAddr}, 10w1023);
+
+        hash(meta.hashed_address_s3, HashAlgorithm.crc16, 10w0,
+                 {2w0, hdr.ipv4.dstAddr, 1w1, hdr.ipv4.srcAddr}, 10w1023);
+    }
+
+
+    action update_register() {
+        @atomic {
+            regCountMinSketch.read(tmp, meta.hashed_address_s1);
+            tmp = tmp + 1;
+            regCountMinSketch.write(meta.hashed_address_s1, tmp);
+            meta.regVals1 = tmp;
+        }
+
+        @atomic {
+            regCountMinSketch.read(tmp, meta.hashed_address_s2);
+            tmp = tmp + 1;
+            regCountMinSketch.write(meta.hashed_address_s2, tmp);
+            meta.regVals2 = tmp;
+        }
+
+        @atomic {
+            regCountMinSketch.read(tmp, meta.hashed_address_s3);
+            tmp = tmp + 1;
+            regCountMinSketch.write(meta.hashed_address_s3, tmp);
+            meta.regVals3 = tmp;
+        }
+
+        if (meta.regVals1 <  meta.regVals2) {
+            meta.minRegVal = meta.regVals1;
+        } else {
+            meta.minRegVal = meta.regVals2;
+        }
+
+        if (meta.regVals3 <  meta.minRegVal) {
+            meta.minRegVal = meta.regVals3;
+        }
+    }

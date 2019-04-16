@@ -1,0 +1,9 @@
+            compute_ipv4_src_hash_index_ss();
+            compute_ipv4_dst_hash_index_ss();
+
+            regSketchBitmapSs.read(tmpBitSs, meta.srcHashIdxSs*8 + meta.dstHashIdxSs);
+            if (tmpBitSs == 0) {
+                process_new_flow_ss();
+            }
+
+            regUniqueDstSs.read(meta.uniqueDstCounterSs, meta.srcHashIdxSs);
