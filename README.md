@@ -26,7 +26,7 @@ The system was developed on Ubuntu 16.04 LTS, so please use it for optimum compa
 
 `sudo utils/bootstrap.sh`
 
-It should install all of the required dependencies.
+The script should install all of the required dependencies. It was last tested on 17-Apr-2019 on a fresh installation of Ubuntu 16.04 LTS.
 
 ## Usage
 
