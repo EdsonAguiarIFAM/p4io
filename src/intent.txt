@@ -4,4 +4,4 @@ define intent dropHeavyHitters:
   to     any
   for    traffic('any')
   apply  drop_heavy_hitters
-  with   threshold('more',5)
+  with   threshold('more',50)

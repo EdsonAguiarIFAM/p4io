@@ -50,10 +50,24 @@ cd src
 sudo python intent_listener.py
 ```
 
-You can then send a new intent via a HTTP POST request. For example (if you use `curl`):
+From another session, you can then send an intent via a HTTP POST request with the data in the data.
+For example (if you use `curl`):
 
 ```bash
-curl # ...
+curl -d "@intent.txt" -X POST http://localhost:5050/intent
+```
+
+Content example of `intent.txt`:
+
+```
+import drop_heavy_hitters
+
+define intent dropHeavyHitters:
+  to     any
+  for    traffic('any')
+  apply  drop_heavy_hitters
+  with   threshold('more',50)
+
 ```
 
 ## Support

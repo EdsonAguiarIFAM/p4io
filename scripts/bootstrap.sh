@@ -107,7 +107,7 @@ cd ..
 sudo pip install grpcio
 
 # BMv2 deps (needed by PI)
-# Note that this is not an original repository!
+# Note that this is not the original repository!
 git clone https://github.com/riftadi/behavioral-model.git
 cd behavioral-model
 git checkout ${BMV2_COMMIT}
