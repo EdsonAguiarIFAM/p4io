@@ -56,11 +56,14 @@ sudo apt-get install -y --no-install-recommends \
   pkg-config \
   python \
   python-dev \
+  python-future \
   python-ipaddr \
+  python-jinja2 \
   python-pip \
   python-psutil \
   python-scapy \
   python-setuptools \
+  python-yaml \
   tcpdump \
   unzip \
   vim \
