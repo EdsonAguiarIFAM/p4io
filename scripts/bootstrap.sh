@@ -56,6 +56,7 @@ sudo apt-get install -y --no-install-recommends \
   pkg-config \
   python \
   python-dev \
+  python-flask \
   python-future \
   python-ipaddr \
   python-jinja2 \
