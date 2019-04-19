@@ -10,8 +10,8 @@ TOPO = topology.json
 P4C = p4c-bm2-ss
 RUN_SCRIPT = ../utils/run_exercise.py
 
-source := $(wildcard *.p4)
-outfile := $(source:.p4=.json)
+source := s1_running.p4
+outfile := s1_running.json
 
 compiled_json := $(BUILD_DIR)/$(outfile)
 
@@ -38,8 +38,8 @@ stop:
 
 build: generate dirs $(compiled_json)
 
-$(BUILD_DIR)/%.json: %.p4
-	$(P4C) --p4v 16 $(P4C_ARGS) -o $@ $<
+$(BUILD_DIR)/s1_running.json: s1_running.p4
+        $(P4C) --p4v 16 $(P4C_ARGS) -o $@ $<
 
 dirs:
 	mkdir -p $(BUILD_DIR) $(PCAP_DIR) $(LOG_DIR)
