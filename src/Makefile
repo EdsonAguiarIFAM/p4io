@@ -39,7 +39,7 @@ stop:
 build: generate dirs $(compiled_json)
 
 $(BUILD_DIR)/s1_running.json: s1_running.p4
-        $(P4C) --p4v 16 $(P4C_ARGS) -o $@ $<
+	$(P4C) --p4v 16 $(P4C_ARGS) -o $@ $<
 
 dirs:
 	mkdir -p $(BUILD_DIR) $(PCAP_DIR) $(LOG_DIR)
