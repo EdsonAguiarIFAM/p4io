@@ -2,7 +2,11 @@
 
 This is the repository of the P4I/O prototype.
 
-Please cite the original paper instead if you would like to cite this software:
+## P4I/O
+
+P4I/O is an intent-based networking platform to generate and run network functionality on P4 switches. This repository contains a prototype-grade software version of the P4I/O platform. The idea behind this prototype is described in detail in the [P4I/O paper](https://fernandokuipers.nl/papers/P4IO.pdf).
+
+Please cite the original paper instead if you would like to give credit for or refer to the software:
 
 > Mohammad Riftadi and Fernando A. Kuipers. 2019. P4I/O: Intent-Based Networking with P4. Proc. of 2019 2nd International Workshop on Emerging Trends in Softwarized Networks (ETSN 2019 at NetSoft). Paris, France.
 
