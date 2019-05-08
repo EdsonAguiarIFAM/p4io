@@ -1,6 +1,6 @@
 # P4I/O Prototype Software
 
-This is the repository of the P4I/O prototype.
+This is the official repository of the P4I/O prototype.
 
 ## P4I/O
 
@@ -10,7 +10,7 @@ Please cite the original paper instead if you would like to give credit for or r
 
 > Mohammad Riftadi and Fernando A. Kuipers. 2019. P4I/O: Intent-Based Networking with P4. Proc. of 2019 2nd International Workshop on Emerging Trends in Softwarized Networks (ETSN 2019 at NetSoft). Paris, France.
 
-or you can use the *bibtex* format:
+or you can use the following *bibtex* text:
 ```bibtex
 @INPROCEEDINGS{Rift1906:P4IO,
     AUTHOR="Mohammad Riftadi and Fernando A. Kuipers",
