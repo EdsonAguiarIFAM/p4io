@@ -76,7 +76,7 @@ define intent dropHeavyHitters:
 
 ## Support
 
-Support is not available for this software. If you have any question, you can open an issue in this repository or mail to m.riftadi@student.tudelft.nl. Please note that, however, an answer is not guaranteed.
+Support is not available for this software. If you have any question, you can open an issue in this repository or mail to riftadi@gmail.com. Please note that, however, an answer is not guaranteed.
 
 ## Credits
 
