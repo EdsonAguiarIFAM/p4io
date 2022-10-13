@@ -28,7 +28,7 @@ or you can use the following *bibtex* text:
 
 The system was developed on Ubuntu 16.04 LTS, so please use it for optimum compatibility. Before you can run the prototype, you need to build and install the required software. Please use the script available in the `utils/` directory:
 
-`sudo utils/bootstrap.sh`
+`sudo scripts/bootstrap.sh`
 
 The script should install all of the required dependencies. It was last tested on 17-Apr-2019 on a fresh installation of Ubuntu 16.04 LTS.
 
